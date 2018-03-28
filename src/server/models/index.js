@@ -95,10 +95,10 @@ export default class Model {
 		return await doc.save ();
 	}
 
-	async delete (query: Query) {
+	async delete (_id: string) {
 		const {Model} = this;
 
-		return await Model.find (query).remove ();
+		return await Model.find ({_id}).remove ();
 	}
 
 }

@@ -15,7 +15,8 @@ module.exports = {
 	},
 
 	mongodb: {
-		connstr: 'mongodb://localhost:27017/' + name,
+		connstr: 'mongodb://localhost:27001/' + name,
+		oplog: 'mongodb://localhost:27001/local',
 
 		options: {
 			autoReconnect: true,

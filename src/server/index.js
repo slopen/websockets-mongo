@@ -11,6 +11,7 @@ import connectMongo from 'connect-mongo';
 
 import config from 'config';
 import connectDb from './db';
+import connectOplog from './db/oplog';
 
 import api from './api';
 import ws from './ws';
@@ -40,6 +41,7 @@ const MongoStore = connectMongo (session);
 
 (async (app) => {
 
+    const oplogDb = await connectOplog ();
     const mongooseConnection = await connectDb ();
 
     // express server
@@ -86,11 +88,10 @@ const MongoStore = connectMongo (session);
     http
         .createServer (app)
         .listen (PORT, () => {
-            const {name, port} = mongooseConnection;
-
             console.log (`* ${NAME} server started on port ${PORT}`);
-            console.log (`* ${NAME} mongoose connected to ${port}/${name}`);
             console.log (`* ${NAME} websockets started on ${WS.port}${ws.path ()}`);
+            console.log (`* ${NAME} mongoose connected to ${mongooseConnection.port}/${mongooseConnection.name}`);
+            console.log (`* ${NAME} mongodb oplog connected to ${oplogDb.serverConfig.port}/${oplogDb.databaseName}`);
         });
 
 }) (express ());

@@ -9,6 +9,8 @@ $ npm i
 
 [nginx setup](/nginx)
 
+[replica set setup](/config)
+
 ## production
 ```
 $ npm run production

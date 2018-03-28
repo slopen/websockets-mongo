@@ -42,6 +42,6 @@ export default express.Router ()
 
 	.delete ('/:id', async ({params}: $Request, res: $Response) =>
 		res.json (toJSON (
-			await Box.delete ({_id: params.id})
+			await Box.delete (params.id)
 		))
 	);

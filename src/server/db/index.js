@@ -1,6 +1,7 @@
 // @flow
 import config from 'config';
 import mongoose from 'mongoose';
+import oplogSubscribe from './oplog';
 
 type MongoOptions = {
 	connstr: string;
@@ -12,7 +13,10 @@ const {connstr, options} = opts;
 
 mongoose.Promise = Promise;
 
-export default () =>
-	mongoose
+export default () => {
+	oplogSubscribe ();
+
+	return mongoose
 		.connect (connstr, options)
 		.then (() => mongoose.connection);
+}

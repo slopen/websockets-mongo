@@ -46,9 +46,8 @@ io
 			);
 		client
 			.on ('box:delete', async (item: JsonDoc) =>
-				await Box.delete ({_id: item.id})
+				await Box.delete (item.id)
 			);
-
 	});
 
 io
